@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>Kaart</title>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" />
+ <style>
+   body {padding: 0; margin: 0; }
+   html, body { height: 100%; width: 100%;}
+   #kaardikiht {float:bottom; width:60%; height:80%;}
+ </style>
+ <script>
+   var kaart, abikiht;
+   function algus(){
+    kaart = L.map('kaardikiht').setView([59.473962, 24.948986], 14);
+      new L.TileLayer(
+  'https://tiles.maaamet.ee/tm/tms/1.0.0/hybriid@GMC/{z}/{x}/{y}.png&ASUTUS=TLU&ERIALA=DIGIHUMANITAARIA', {
+	  attribution: "Map: <a  href='http://www.maaamet.ee/'>Maa-amet</a>",
+	  tms: true,
+    }).addTo(kaart);
+abikiht=L.layerGroup()
+abikiht.addTo(kaart);   
+   }
+   
+   
+   function vajutus1(){
+   vastus1.innerText="Vajutati nuppu";
+   	abikiht.clearLayers();
+      L.circle([59.473962, 24.948986], {radius: 1000, color: "yellow"}).addTo(abikiht);
+	  }
+	  
+	function vajutus2(){
+    vastus2.innerText="Koolid";
+	abikiht.clearLayers();
+	L.marker([59.435546, 24.947142]). addTo(abikiht).bindPopup("Loo Keskkool");
+	  }  
+	  
+	  
+
+  </script>
+ </head>  
+ <body onload="algus()">
+ <input type="button" value="vajuta" onclick="vajutus1()" />
+  <span id="vastus1">Vastuse koht</span>
+  <input type="button" value="Koolid" onclick="vajutus2()" />
+ <span id="vastus2">Vastuse koht</span>
+ <div id="kaardikiht"></div>
+ </body>
+</html>
